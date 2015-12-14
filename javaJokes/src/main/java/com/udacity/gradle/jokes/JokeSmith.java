@@ -6,10 +6,10 @@ public class JokeSmith {
     public String getJoke() {
 
         Random rand = new Random();
-        int jokeNumber = rand.nextInt(5);
+        int jokeNumber = rand.nextInt(7);
         String jokeText = "";
         if (jokeNumber == 0) {
-            jokeText = "To file for bankruptcy";
+            jokeText = "It is entering the teenage weird years";
         } else if (jokeNumber == 1) {
             jokeText = "Because Tyson was chasing it";
         } else if (jokeNumber == 2) {
@@ -18,7 +18,11 @@ public class JokeSmith {
             jokeText = "To get to the other side";
         } else if (jokeNumber == 4) {
             jokeText = "It was too far to walk around";
+        } else if (jokeNumber == 5) {
+            jokeText = "It is lunch time";
+        } else if (jokeNumber == 6) {
+            jokeText = "Way too many chickens on this side";
         }
-        return "Why did the chicken cross the road? " + jokeText;
+        return "Why did the chicken cross the road? " +"\n\n"+ jokeText;
     }
 }

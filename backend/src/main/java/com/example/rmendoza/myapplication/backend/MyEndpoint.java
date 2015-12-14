@@ -40,9 +40,7 @@ public class MyEndpoint {
     public MyBean sayHi(@Named("name") String name) {
         MyBean response = new MyBean();
         JokeSmith myJoker = new JokeSmith();
-
         response.setData(myJoker.getJoke());
-
         return response;
     }
 

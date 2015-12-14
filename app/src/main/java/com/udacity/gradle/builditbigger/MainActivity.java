@@ -56,10 +56,10 @@ public class MainActivity extends ActionBarActivity {
     public void tellJoke(View view){
 
 //        Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
-        JokeSmith myJoker = new JokeSmith();
-        Intent myIntent = new Intent(this, TextViewToDisplay.class);
-        myIntent.putExtra("EntireJoke", myJoker.getJoke());
-        startActivity(myIntent);
+        //JokeSmith myJoker = new JokeSmith();
+        //Intent myIntent = new Intent(this, TextViewToDisplay.class);
+        //myIntent.putExtra("EntireJoke", myJoker.getJoke());
+        //startActivity(myIntent);
 
         new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "This thing works"));
 
@@ -106,7 +106,10 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+            Intent myIntent = new Intent(context, TextViewToDisplay.class);
+            myIntent.putExtra("EntireJoke", result);
+            startActivity(myIntent);
         }
     }
 
