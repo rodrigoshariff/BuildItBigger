@@ -9,7 +9,7 @@ public class JokeSmith {
         int jokeNumber = rand.nextInt(7);
         String jokeText = "";
         if (jokeNumber == 0) {
-            jokeText = "It is entering the teenage weird years";
+            jokeText = "It's entering the teenage weird years";
         } else if (jokeNumber == 1) {
             jokeText = "Because Tyson was chasing it";
         } else if (jokeNumber == 2) {
@@ -19,7 +19,7 @@ public class JokeSmith {
         } else if (jokeNumber == 4) {
             jokeText = "It was too far to walk around";
         } else if (jokeNumber == 5) {
-            jokeText = "It is lunch time";
+            jokeText = "It's lunch time";
         } else if (jokeNumber == 6) {
             jokeText = "Way too many chickens on this side";
         }
