@@ -95,10 +95,11 @@ public class MainActivity extends ActionBarActivity {
             }
 
             context = params[0].first;
-            String name = params[0].second;
+            //String name = params[0].second;
 
             try {
-                return myApiService.getJoke(name).execute().getData();
+                //return myApiService.getJoke(name).execute().getData();
+                return myApiService.getJoke().execute().getData();
             } catch (IOException e) {
                 return e.getMessage();
             }
