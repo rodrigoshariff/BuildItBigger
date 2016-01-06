@@ -1,9 +1,12 @@
 package com.udacity.gradle.builditbigger.free;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Pair;
 import android.view.Menu;
@@ -14,16 +17,32 @@ import com.example.rmendoza.myapplication.backend.myApi.MyApi;
 import com.example.rmendoza.textviewtodisplay.TextViewToDisplay;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.udacity.gradle.builditbigger.EndpointsAsyncTask;
 import com.udacity.gradle.builditbigger.R;
 
 import java.io.IOException;
 
 public class MainActivity extends ActionBarActivity {
 
+    String entireJoke = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(intentReceiver, new IntentFilter("EndpointTag"));
+    }
+
+    @Override
+    protected void onPause() {
+
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(intentReceiver);
+        super.onPause();
     }
 
 
@@ -57,19 +76,32 @@ public class MainActivity extends ActionBarActivity {
         //myIntent.putExtra("EntireJoke", myJoker.getJoke());
         //startActivity(myIntent);
 
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "This thing works"));
+        EndpointsAsyncTask getJoke = new EndpointsAsyncTask();
+        getJoke.execute(new Pair<Context, String>(this, ""));
 
     }
 
+    private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            entireJoke = intent.getStringExtra("EntireJoke");
 
-    public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+            Intent myIntent = new Intent(context, TextViewToDisplay.class);
+            myIntent.putExtra("EntireJoke", entireJoke);
+            startActivity(myIntent);
+
+        }
+    };
+
+
+/*    public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
         private MyApi myApiService = null;
         private Context context;
 
         @Override
         protected String doInBackground(Pair<Context, String>... params) {
             if(myApiService == null) {  // Only do this once
-                /*MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
+                *//*MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                         new AndroidJsonFactory(), null)
                         // options for running against local devappserver
                         // - 10.0.2.2 is localhost's IP address in Android emulator
@@ -80,7 +112,7 @@ public class MainActivity extends ActionBarActivity {
                             public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
                                 abstractGoogleClientRequest.setDisableGZipContent(true);
                             }
-                            });*/
+                            });*//*
                 MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                         new AndroidJsonFactory(), null)
                         .setRootUrl("https://javajokes-1156.appspot.com/_ah/api/");
@@ -108,7 +140,7 @@ public class MainActivity extends ActionBarActivity {
             myIntent.putExtra("EntireJoke", result);
             startActivity(myIntent);
         }
-    }
+    }*/
 
 
 }

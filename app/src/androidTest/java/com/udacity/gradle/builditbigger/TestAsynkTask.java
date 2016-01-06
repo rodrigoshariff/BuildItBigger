@@ -33,9 +33,9 @@ public class TestAsynkTask extends AndroidTestCase {
 
         signal.await();
         LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(intentReceiver);
-
         Log.d("Joke is: ", entireJoke);
         assertTrue(entireJoke.length()>0);
+
     }
 
     private BroadcastReceiver intentReceiver = new BroadcastReceiver() {

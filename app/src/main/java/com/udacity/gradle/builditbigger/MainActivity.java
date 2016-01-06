@@ -31,7 +31,6 @@ public class MainActivity extends ActionBarActivity {
 
     String entireJoke = null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +84,7 @@ public class MainActivity extends ActionBarActivity {
         //myIntent.putExtra("EntireJoke", myJoker.getJoke());
         //startActivity(myIntent);
         EndpointsAsyncTask getJoke = new EndpointsAsyncTask();
-        getJoke.execute(new Pair<Context, String>(this, "This thing works"));
+        getJoke.execute(new Pair<Context, String>(this, ""));
 
     }
 
@@ -99,11 +98,7 @@ public class MainActivity extends ActionBarActivity {
             startActivity(myIntent);
 
         }
-    } ;
-
-
-
-
+    };
 
 
 
